@@ -6,6 +6,9 @@ const MainNavBar = () => (
     <Link to='/'>
       Home
     </Link>
+    <Link to='/users'>
+      Patients
+    </Link>
   </>
 )
 

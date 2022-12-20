@@ -8,7 +8,7 @@ const UserShow = ({}) => {
   const { id } = useParams()
   const [user, setUser] = useState({
     first_name: '', last_name: '', dob: ''})
-  const [courses, setCourses] = useState([])
+  const [doctors, setDoctors] = useState([])
 
   useEffect ( () => {
     axios.get(`/api/users/${id}`)
