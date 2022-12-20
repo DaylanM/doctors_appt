@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-//import DoctorList from './DoctorList'
-//import DoctorForm from './DoctorForm'
+import DoctorForm from './DoctorForm';
+import DoctorList from './DoctorList'
 
 const Doctors = () => {
   const [doctors,setDoctors] = useState ([])
@@ -14,7 +14,7 @@ const Doctors = () => {
     .catch (err =>console.log(err))
   }
 
-  const updateDoctor = (id, Doctor) => {
+  const updateDoctor = (id, doctor) => {
     axios.put(`/api/doctors/${id}`, {doctor})
     .then(res => {
       const newUpdatedDoctor = doctors.map (d => {
@@ -31,9 +31,23 @@ const Doctors = () => {
   const deleteDoctor = (id) => {
   axios.delete(`/api/doctors/${id}`)
   .then(res => {
-    setDoctors(worker.filter (d => d.id !== id))
+    setDoctors(doctor.filter (d => d.id !== id))
   })
   .catch(err => console.log(err))
   }
+
+  return (
+    <>
+    <DoctorForm  addDoctor = {addDoctor}/>
+    <h1>
+      Doctors
+    </h1>
+    <DoctorList
+      doctors = {doctors}
+      updateDoctor = {updateDoctor}
+      deleteDoctor ={deleteDoctor}
+    />
+    </>
+  )
 }
-export default Doctors
+export default Doctors;
