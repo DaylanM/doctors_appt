@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const DoctorForm = ({addDoctor, id, first_name, last_name, updateDoctor, setEdit}) => {
+const DoctorForm = ({addDoctor, id, first_name, last_name, practice, updateDoctor, setEdit}) => {
   const [ doctor, setDoctor] = useState ({first_name:'', last_name:'', practice:'', })
 
   useEffect (() => {
