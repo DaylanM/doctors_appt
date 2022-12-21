@@ -31,7 +31,7 @@ const Doctors = () => {
   const deleteDoctor = (id) => {
   axios.delete(`/api/doctors/${id}`)
   .then(res => {
-    setDoctors(doctor.filter (d => d.id !== id))
+    setDoctors(doctors.filter (d => d.id !== id))
   })
   .catch(err => console.log(err))
   }
