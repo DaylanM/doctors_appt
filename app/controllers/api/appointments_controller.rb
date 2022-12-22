@@ -29,7 +29,7 @@ class Api::AppointmentsController < ApplicationController
 
   def destroy
     @appointment.destroy
-    render json: { message: "Unenrolled" }
+    render json: { message: "removed" }
   end
 
   def avausers

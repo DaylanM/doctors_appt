@@ -1,18 +1,31 @@
+import { Card, Button, Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
-const HomeBody = () => (
-  <>
-    <h2>These are our Doctors</h2>
-    
-    <h4>Doctor 1</h4>
-    <img src="https://images.pexels.com/photos/4167541/pexels-photo-4167541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="doctor pic" width='100px' />
-    <h4>Doctor 2</h4>
-    <img src="https://images.pexels.com/photos/4167541/pexels-photo-4167541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="doctor pic" width='100px' />
-    <h4>Doctor 3</h4>
-    <img src="https://images.pexels.com/photos/4167541/pexels-photo-4167541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="doctor pic" width='100px' />
-    <h4>Doctor 4</h4>
-    <img src="https://images.pexels.com/photos/4167541/pexels-photo-4167541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="doctor pic" width='100px' />
-  </>
+const HomeBody = ({ doctors }) => (
+  <Container>
+    <h1>Our Doctors</h1>
+    <Row sm='12' md='4'>
+      { doctors.map( c =>
+        <Col key={c.id}>
+          <Card style={{ width: '16rem', height: '20rem' }}>
+            <Card.Body>
+              <Card.Title>{c.first_name}</Card.Title>
+              <Card.Text>
+                {c.practice}
+              </Card.Text>
+              <Link 
+                to={`/doctors/${c.id}`}
+                state={ {...c} }
+              >
+                <Button>Show</Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Col>
+      )}
+    </Row>
+  </Container>
 )
 
 export default HomeBody;

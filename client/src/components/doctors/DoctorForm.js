@@ -27,40 +27,40 @@ const DoctorForm = ({addDoctor, setAdd, id, first_name, last_name, practice, upd
 
   return (
     <>
-    <h1>{id?'Update':'Create'}Doctor</h1>
+    <h1>{id ? 'Update' : 'Create' } Doctor</h1>
     <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <Form.Label>First Name</Form.Label>
-          <Form.Control 
-            name='first_name'
-            value={doctor.first_name}
-            onChange={(e) => setDoctor({...doctor, title: e.target.value })}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control 
-            name='last_name'
-            value={doctor.last_name}
-            onChange={(e) => setDoctor({...doctor, last_name: e.target.value })}
-            required
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label>Practice</Form.Label>
-          <Form.Control 
-            name='practice'
-            value={doctor.practice}
-            onChange={(e) => setDoctor({...doctor, practice: e.target.value })}
-            required
-          />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-      </>
+      <Form.Group>
+        <Form.Label>First Name</Form.Label>
+        <Form.Control 
+          name='first_name'
+          value={doctor.first_name}
+          onChange={(e) => setDoctor({...doctor, first_name: e.target.value })}
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control 
+          name='last_name'
+          value={doctor.last_name}
+          onChange={(e) => setDoctor({...doctor, last_name: e.target.value })}
+          required
+        />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Practice</Form.Label>
+        <Form.Control 
+          name='practice'
+          value={doctor.practice}
+          onChange={(e) => setDoctor({...doctor, practice: e.target.value })}
+          required
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+    </>
   )
 }
 

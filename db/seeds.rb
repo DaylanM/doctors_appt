@@ -14,6 +14,14 @@ User.delete_all
     last_name: Faker::FunnyName.name,
     dob: '1-1-2000'
   )
+
+  Appointment.create(
+    user_id: user.id,
+    doctor_id: doctor.id,
+    # appt_notes: Faker::Movies::HarryPotter.quote
+    # appt_subject: Faker::Movies::HarryPotter.house
+    # appt_time: Faker::Time.backward(days: 5, period: :morning, format: :short)
+  )
 end
 
 puts "# of Doctors"
