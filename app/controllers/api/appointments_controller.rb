@@ -1,5 +1,5 @@
 class Api::AppointmentsController < ApplicationController
-  before_action :set_user
+  before_action :set_doctor
   before_action :set_appointments, only: [:show, :update, :destroy]
 
   def index
@@ -37,8 +37,8 @@ class Api::AppointmentsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(params[:user_id])
+    def set_doctor
+      @doctor = Doctor.find(params[:user_id])
     end
 
     def set_appointments
