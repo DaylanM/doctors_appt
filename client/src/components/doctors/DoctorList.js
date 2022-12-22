@@ -18,8 +18,6 @@ const DoctorList = ({ doctors }) => (
               >
                 <Button>Show</Button>
               </Link>
-              <Button>Edit</Button>
-              <Button onClick={() => deleteDoctor(c.id)}>Delete</Button>
             </Card.Body>
           </Card>
         </Col>

@@ -49,9 +49,6 @@ const DoctorShow = () => {
           />
         </Modal.Body>
       </Modal>
-      <Button onClick={() => deleteDoctor(id)}>
-        Delete
-      </Button>
       <br />
       <br />
       <br />

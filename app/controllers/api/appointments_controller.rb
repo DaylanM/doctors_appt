@@ -1,5 +1,5 @@
 class Api::AppointmentsController < ApplicationController
-  before_action :set_doctor
+  before_action :set_user
   before_action :set_appointments, only: [:show, :update, :destroy]
 
   def index
@@ -29,7 +29,7 @@ class Api::AppointmentsController < ApplicationController
 
   def destroy
     @appointment.destroy
-    render json: { message: "Unenrolled" }
+    render json: { message: "removed" }
   end
 
   def avausers
@@ -37,12 +37,12 @@ class Api::AppointmentsController < ApplicationController
   end
 
   private
-    def set_doctor
-      @doctor = Doctor.find(params[:doctor_id])
+    def set_user
+      @user = User.find(params[:user_id])
     end
 
     def set_appointments
-      @appointment = @doctor.appointments.find(params[:id])
+      @appointment = @user.appointments.find(params[:id])
     end
 
     def appointment_params

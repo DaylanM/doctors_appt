@@ -11,27 +11,26 @@ const AppointmentProvider = ({ children }) => {
   const navigate = useNavigate();
   const [users, setUsers] = useState([])
 
-  const getAllAppointments = (doctorId) => {
-    axios.get(`/api/doctors/${doctorId}/appointments`)
+  const getAllAppointments = (userId) => {
+    axios.get(`/api/users/${userId}/appointments`)
       .then(res => setAppointments(res.data))
       .catch(err => console.log(err))
   }
 
-  const getAllUsers = (doctorId) => {
-    // make api call to our custom route -> custom action
-    axios.get(`/api/doctors/${doctorId}/avausers`)
+  const getAllUsers = (userId) => {
+    axios.get(`/api/users/${userId}/avausers`)
       .then(res => setUsers(res.data))
       .catch(err => console.log(err))
   }
 
-  const addAppointment = (doctorId, appointment) => {
-    axios.post(`/api/doctors/${doctorId}/appointments`, { appointment })
+  const addAppointment = (userId, appointment) => {
+    axios.post(`/api/users/${userId}/appointments`, { appointment })
     .then(res => setAppointments([...appointments, res.data]))
     .catch(err => console.log(err))
   }
 
-  const updateAppointment = (doctorId, id, appointment) => {
-    axios.put(`/api/doctors/${doctorId}/appointments/${id}`, { appointment })
+  const updateAppointment = (userId, id, appointment) => {
+    axios.put(`/api/users/${userId}/appointments/${id}`, { appointment })
       .then( res => {
         const newUpdatedAppointments = appointments.map( e => {
           if (e.id === id) {
@@ -45,11 +44,11 @@ const AppointmentProvider = ({ children }) => {
       .catch(err => console.log(err))
   }
 
-  const deleteAppointment = (doctorId, id) => {
-    axios.delete(`/api/doctors/${doctorId}/appointments/${id}`)
+  const deleteAppointment = (userId, id) => {
+    axios.delete(`/api/users/${userId}/appointments/${id}`)
       .then(res => {
         setAppointments(appointments.filter(e => e.id !== id))
-        navigate(`/doctors/`)
+        navigate(`/users/`)
       })
       .catch(err => console.log(err))
   }

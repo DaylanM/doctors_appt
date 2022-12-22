@@ -1,5 +1,7 @@
 import HomeBody from "./HomeBody";
 import HomeFooter from "./HomeFooter";
+import { DoctorConsumer } from '../../providers/DoctorProvider';
+
 
 
 const Home = () => (
@@ -11,4 +13,10 @@ const Home = () => (
   </>
 )
 
-export default Home;
+const ConnectedHome = (props) => (
+  <DoctorConsumer>
+    { value => <HomeBody {...props}
+    {...value} />}
+  </DoctorConsumer>
+)
+export default ConnectedHome;
