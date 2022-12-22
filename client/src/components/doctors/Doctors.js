@@ -22,8 +22,9 @@ const Doctors = ({ doctors }) => {
         :
         <Button
         onClick={() => setAdd(true)}
+        variant="success"
         >
-          +
+          Create Doctor
         </Button>
       }
       <br />
