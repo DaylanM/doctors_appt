@@ -13,7 +13,7 @@ const Users = ({ users }) => {
   return (
     <Container>
       <Button variant="primary" onClick={() => setAdd(true)}>
-        +
+        Create User
       </Button>
 
       <Modal show={adding} onHide={() => setAdd(false)}>

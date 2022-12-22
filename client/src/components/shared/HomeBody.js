@@ -1,5 +1,6 @@
 import { Card, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Image from 'react-bootstrap/Image';
 
 
 const HomeBody = ({ doctors }) => (
@@ -14,11 +15,11 @@ const HomeBody = ({ doctors }) => (
               <Card.Text>
                 {c.practice}
               </Card.Text>
-              <Link 
-                to={`/doctors/${c.id}`}
-                state={ {...c} }
-              >
-                <Button>Show</Button>
+              <Image src="https://plus.unsplash.com/premium_photo-1661766569022-1b7f918ac3f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80" fluid width='100px' />
+              <Link to={`/doctors/${c.id}`}state={ {...c} }>
+                <div className="d-grid gap-2">
+                  <Button variant="secondary" size='lg'>Show</Button>
+                </div>
               </Link>
             </Card.Body>
           </Card>
