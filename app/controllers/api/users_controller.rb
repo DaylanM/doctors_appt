@@ -31,6 +31,10 @@ class Api::UsersController < ApplicationController
     render json: { message: 'user deleted' }
   end
 
+  def userdoctors
+    render json: @user.doctors
+  end
+
   private
     def set_user
       @user = User.find(params[:id])

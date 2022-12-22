@@ -1,10 +1,11 @@
-import {useState, useEffect} from 'react';
-import {useParams, useLocation } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useParams, useLocation } from "react-router-dom";
 import axios from 'axios';
+import { Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import UserList from '../users/UserList';
-import { Button } from 'react-bootstrap';
-
+import { DoctorConsumer } from '../../providers/DoctorProvider';
+import DoctorForm from './DoctorForm';
 
 const DoctorShow = () => {
   const { id } = useParams()
@@ -12,9 +13,10 @@ const DoctorShow = () => {
   const location = useLocation()
   const { first_name, last_name, practice } = location.state 
   const [users, setUsers] = useState([])
+  const [editing, setEdit] = useState(false)
 
   useEffect( () => {
-    axios.get(`/api/${id}/courseusers`)
+    axios.get(`/api/${id}/doctorusers`)
       .then(res => setUsers(res.data))
       .catch( err => console.log(err))
   }, [])
@@ -29,15 +31,42 @@ const DoctorShow = () => {
       >
         <Button>Appointments</Button>
       </Link>
+      <Button variant="waring" onClick={() => setEdit(true)}>
+        Edit
+      </Button>
+
+      <Modal show={editing} onHide={() => setEdit(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Doctor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <DoctorForm
+            id={id}
+            first_name={first_name}
+            last_name={last_name}
+            practice={practice}
+            setEdit={setEdit}
+          />
+        </Modal.Body>
+      </Modal>
+      <Button onClick={() => deleteDoctor(id)}>
+        Delete
+      </Button>
       <br />
       <br />
       <br />
-      <h1>All Users for Doctor</h1>
+      <h1>All Users with the Doctor</h1>
       { users.length > 0 ?
         <UserList users={users} />
-      : <p>No users with Doctor</p>}
+      : <p>No users in the doctor</p>}
     </>
   )
 }
 
-export default DoctorShow;
+const ConnectDoctorShow = (props) => (
+  <DoctorConsumer>
+    { value => <DoctorShow {...props} {...value} />}
+  </DoctorConsumer>
+)
+
+export default ConnectDoctorShow;

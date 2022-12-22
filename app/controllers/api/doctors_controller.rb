@@ -6,7 +6,6 @@ class Api::DoctorsController < ApplicationController
   end
 
   def show
-    @doctor = Doctor.find(params[:id])
     render json: @doctor
   end
 
@@ -15,24 +14,25 @@ class Api::DoctorsController < ApplicationController
     if @doctor.save
       render json: @doctor
     else
-      render json: {error: @doctor.error },  status: :unprocessable_entity
-      end
+      render json: {errors: @doctor.errors },  status: :unprocessable_entity
+    end
   end
 
   def update
     if @doctor.update(doctor_params)
       render json: @doctor
     else
-      render json: {error: @doctor.error },  status: :unprocessable_entity
+      render json: {errors: @doctor.errors },  status: :unprocessable_entity
+    end
   end
 
   def destroy
     @doctor.destroy
     render json:{ message: 'Bye Bye Doc'}
-    end
+  end
 
   def doctorusers
-    render json: @course.users
+    render json: @doctor.users
   end
  
   private
@@ -43,6 +43,4 @@ class Api::DoctorsController < ApplicationController
     def set_doctors
       @doctor = Doctor.find(params[:id])
     end
-
-  end
 end

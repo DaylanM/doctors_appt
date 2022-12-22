@@ -1,32 +1,25 @@
 import { Card, Button, Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
-const DoctorList = ({ doctors, updateDoctor, deleteDoctor }) => (
+const DoctorList = ({ doctors }) => (
   <Container>
     <Row sm='12' md='4'>
       { doctors.map( c =>
         <Col key={c.id}>
           <Card style={{ width: '16rem', height: '20rem' }}>
             <Card.Body>
-              <Card.Title>{c.title}</Card.Title>
+              <Card.Title>{c.first_name}</Card.Title>
               <Card.Text>
-                {c.desc}
+                {c.practice}
               </Card.Text>
               <Link 
                 to={`/doctors/${c.id}`}
                 state={ {...c} }
               >
-                <Button variant="primary">
-                  Show
-                </Button>
+                <Button>Show</Button>
               </Link>
-              <Button variant="warning">Edit</Button>
-              <Button 
-                variant="danger"
-                onClick={() => deleteDoctor(c.id)}
-              >
-                Delete
-              </Button>
+              <Button>Edit</Button>
+              <Button onClick={() => deleteDoctor(c.id)}>Delete</Button>
             </Card.Body>
           </Card>
         </Col>
