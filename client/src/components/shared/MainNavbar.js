@@ -1,12 +1,35 @@
 import { Link } from "react-router-dom";
+import { Navbar, Nav, Container } from 'react-bootstrap';
 
-const MainNavBar = () => (
+
+const MainNavbar = () => (
   <>
-    <h1>Clinic</h1>
-    <Link to='/'>
-      Home
-    </Link>
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand>Clinic</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav" className='justify-content-end'>
+          <Nav>
+            <Nav.Link>
+              <Link to='/'>
+                Home
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to='/doctors'>
+                Doctors
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link to='/users'>
+                Patients
+              </Link>
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   </>
 )
 
-export default MainNavBar;
+export default MainNavbar;

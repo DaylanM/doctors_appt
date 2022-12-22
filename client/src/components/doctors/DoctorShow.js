@@ -1,41 +1,72 @@
-import {useState} from 'react'
+import { useState, useEffect } from 'react';
+import { useParams, useLocation } from "react-router-dom";
+import axios from 'axios';
+import { Button, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import UserList from '../users/UserList';
+import { DoctorConsumer } from '../../providers/DoctorProvider';
 import DoctorForm from './DoctorForm';
 
-const DoctorShow = ({id, first_name, last_name, practice, updateDoctor, deleteDoctor} ) => {
+const DoctorShow = () => {
+  const { id } = useParams()
+
+  const location = useLocation()
+  const { first_name, last_name, practice } = location.state 
+  const [users, setUsers] = useState([])
   const [editing, setEdit] = useState(false)
 
-  return (
+  useEffect( () => {
+    axios.get(`/api/${id}/doctorusers`)
+      .then(res => setUsers(res.data))
+      .catch( err => console.log(err))
+  }, [])
+
+  return(
     <>
-    {
-      editing ? 
-      <>
-      <DoctorForm
-         id={id}
-         first_name ={first_name}
-         last_name ={last_name}
-         practice ={practice}
-         updateDoctor ={updateDoctor}
-         setEdit={setEdit}
-         />
-         <button onClick= {() => setEdit(false)}>
-         Cancel
-         </button>
-         </>
-         :
-         <>
-         <h2>{first_name}</h2>
-         <h3>{last_name}</h3>
-         <h4>{practice}</h4>
-         <button
-         onClick={() => setEdit(true)}>
-         Edit?
-         </button>
-         <button onClick={() => deleteDoctor(id)}>
-         Delete?
-         </button>
-         </>
-    }
+      <h1>{first_name} {last_name}</h1>
+      <h4>{practice}</h4>
+      <Link 
+        to={`/${id}/appointments`}
+        state={{ doctorName: first_name }}
+      >
+        <Button>Appointments</Button>
+      </Link>
+      <Button variant="waring" onClick={() => setEdit(true)}>
+        Edit
+      </Button>
+
+      <Modal show={editing} onHide={() => setEdit(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Doctor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <DoctorForm
+            id={id}
+            first_name={first_name}
+            last_name={last_name}
+            practice={practice}
+            setEdit={setEdit}
+          />
+        </Modal.Body>
+      </Modal>
+      <Button onClick={() => deleteDoctor(id)}>
+        Delete
+      </Button>
+      <br />
+      <br />
+      <br />
+      <h1>All Users with the Doctor</h1>
+      { users.length > 0 ?
+        <UserList users={users} />
+      : <p>No users in the doctor</p>}
     </>
   )
 }
-export default DoctorShow;
+
+const ConnectDoctorShow = (props) => (
+  <DoctorConsumer>
+    { value => <DoctorShow {...props} {...value} />}
+  </DoctorConsumer>
+)
+
+export default ConnectDoctorShow;

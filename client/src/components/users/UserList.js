@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import { ListGroup, Button,} from 'react-bootstrap';
 
-const UserList = ({ users, deleteUser }) => (
+const UserList = ({ users }) => (
   <>
     <ListGroup variant="flush">
       { users.map( u =>
         <ListGroup.Item>
-          {u.first_name} {u.last_name} {u.dob}
+          <h4>First Name</h4>{u.first_name}
+          <h4>Last Name</h4>{u.last_name}
+          <h4>DOB</h4>{u.dob}
+          <br />
           <Link to={`/users/${u.id}`}>
-            <Button>Show</Button>
+            <Button>show</Button>
           </Link>
-          <Button onClick={() => deleteUser(u.id)}>
-            Delete
-          </Button>
         </ListGroup.Item>
       )}
     </ListGroup>
