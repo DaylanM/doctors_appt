@@ -7,7 +7,7 @@ const UserList = ({ users, deleteUser }) => (
       { users.map( u =>
         <ListGroup.Item>
           {u.first_name} {u.last_name} {u.dob}
-          <Link to={`../doctors/doctors${u.id}`}>
+          <Link to={`/users/${u.id}`}>
             <Button>Doctors</Button>
           </Link>
           <Button onClick={() => deleteUser(u.id)}>
