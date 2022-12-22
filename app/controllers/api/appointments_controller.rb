@@ -38,7 +38,7 @@ class Api::AppointmentsController < ApplicationController
 
   private
     def set_doctor
-      @doctor = Doctor.find(params[:user_id])
+      @doctor = Doctor.find(params[:doctor_id])
     end
 
     def set_appointments
