@@ -1,5 +1,5 @@
 class Api::DoctorsController < ApplicationController
- before_action :set_doctors, only [:show, :update, :destroy]
+ before_action :set_doctors, only: [:show, :update, :destroy, :doctorusers]
  
   def index
     render json: Doctor.all
@@ -31,7 +31,11 @@ class Api::DoctorsController < ApplicationController
     render json:{ message: 'Bye Bye Doc'}
     end
 
-  def private
+  def doctorusers
+    render json: @course.users
+  end
+ 
+  private
     def doctor_params
       params.require(:doctor).permit(:first_name, :last_name, :practice)
     end

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const DoctorForm = ({addDoctor, id, first_name, last_name, practice, updateDoctor, setEdit}) => {
-  const [ doctor, setDoctor] = useState ({first_name:'', last_name:'', practice:'', })
+const DoctorForm = ({addDoctor, setAdd, id, first_name, last_name, practice, updateDoctor, setEdit}) => {
+  const [ doctor, setDoctor] = useState ({first_name:'', last_name:'', practice:'' })
 
   useEffect (() => {
     if (id) {
@@ -16,6 +16,7 @@ const DoctorForm = ({addDoctor, id, first_name, last_name, practice, updateDocto
      setEdit(false)
     } else {
       addDoctor(doctor)
+      setAdd(false)
    }
 
     setDoctor({ first_name: '', last_name: '', practice:'', })

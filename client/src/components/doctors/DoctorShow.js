@@ -1,41 +1,43 @@
-import {useState} from 'react'
-import DoctorForm from './DoctorForm';
+import {useState, useEffect} from 'react';
+import {useParams, useLocation } from "react-router-dom";
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import UserList from '../users/UserList';
+import { Button } from 'react-bootstrap';
 
-const DoctorShow = ({id, first_name, last_name, practice, updateDoctor, deleteDoctor} ) => {
-  const [editing, setEdit] = useState(false)
 
-  return (
+const DoctorShow = () => {
+  const { id } = useParams()
+
+  const location = useLocation()
+  const { first_name, last_name, practice } = location.state 
+  const [users, setUsers] = useState([])
+
+  useEffect( () => {
+    axios.get(`/api/${id}/courseusers`)
+      .then(res => setUsers(res.data))
+      .catch( err => console.log(err))
+  }, [])
+
+  return(
     <>
-    {
-      editing ? 
-      <>
-      <DoctorForm
-         id={id}
-         first_name ={first_name}
-         last_name ={last_name}
-         practice ={practice}
-         updateDoctor ={updateDoctor}
-         setEdit={setEdit}
-         />
-         <button onClick= {() => setEdit(false)}>
-         Cancel
-         </button>
-         </>
-         :
-         <>
-         <h2>{first_name}</h2>
-         <h3>{last_name}</h3>
-         <h4>{practice}</h4>
-         <button
-         onClick={() => setEdit(true)}>
-         Edit?
-         </button>
-         <button onClick={() => deleteDoctor(id)}>
-         Delete?
-         </button>
-         </>
-    }
+      <h1>{first_name} {last_name}</h1>
+      <h4>{practice}</h4>
+      <Link 
+        to={`/${id}/appointments`}
+        state={{ doctorName: first_name }}
+      >
+        <Button>Appointments</Button>
+      </Link>
+      <br />
+      <br />
+      <br />
+      <h1>All Users for Doctor</h1>
+      { users.length > 0 ?
+        <UserList users={users} />
+      : <p>No users with Doctor</p>}
     </>
   )
 }
+
 export default DoctorShow;

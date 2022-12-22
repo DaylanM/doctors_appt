@@ -3,11 +3,9 @@ import Home from './components/shared/Home';
 import MainNavBar from './components/shared/MainNavbar';
 import NoMatch from './components/shared/NoMatch';
 import Doctors from './components/doctors/Doctors';
-import Users from './components/users/Users'
 import Users from './components/users/Users';
 import DoctorShow from './components/doctors/DoctorShow'
 import UserShow from './components/users/UserShow';
-import Doctors from './components/doctors/Doctors'
 
 const App = () => (
   <>
