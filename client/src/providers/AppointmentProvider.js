@@ -18,7 +18,6 @@ const AppointmentProvider = ({ children }) => {
   }
 
   const getAllUsers = (doctorId) => {
-    // make api call to our custom route -> custom action
     axios.get(`/api/doctors/${doctorId}/avausers`)
       .then(res => setUsers(res.data))
       .catch(err => console.log(err))

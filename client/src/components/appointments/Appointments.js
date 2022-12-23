@@ -19,7 +19,7 @@ const Appointments = ({ getAllAppointments, appointments }) => {
   return (
     <Container>
       <Button variant="primary" onClick={() => setAdd(true)}>
-        +
+        Create Appointment
       </Button>
 
       <Modal show={adding} onHide={() => setAdd(false)}>

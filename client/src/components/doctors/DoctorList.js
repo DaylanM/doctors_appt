@@ -15,10 +15,7 @@ const DoctorList = ({ doctors }) => (
                 {c.practice}
               </Card.Text>
               <Image src="https://plus.unsplash.com/premium_photo-1661766569022-1b7f918ac3f3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1035&q=80" fluid width='100px' />
-              <Link 
-                to={`/doctors/${c.id}`}
-                state={ {...c} }
-              >
+              <Link to={`/doctors/${c.id}`} state={ {...c} }>
                 <Button variant="dark">Show</Button>
               </Link>
             </Card.Body>
